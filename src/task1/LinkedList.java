@@ -123,7 +123,6 @@ public class LinkedList {
         _nodeAfter.next = _nodeToInsert;
         _nodeToInsert.next = node1;
     }
-
 }
 
 class Node {
