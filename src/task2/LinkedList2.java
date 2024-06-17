@@ -1,28 +1,32 @@
-package task1;
+package task2;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class LinkedList {
+public class LinkedList2 {
     public Node head;
     public Node tail;
 
-    public LinkedList() {
+    public LinkedList2() {
         head = null;
         tail = null;
     }
 
-    public void addInTail(Node item) {
-        if (this.head == null)
-            this.head = item;
-        else
-            this.tail.next = item;
-        this.tail = item;
+    public void addInTail(Node _item) {
+        if (head == null) {
+            this.head = _item;
+            this.head.next = null;
+            this.head.prev = null;
+        } else {
+            this.tail.next = _item;
+            _item.prev = tail;
+        }
+        this.tail = _item;
     }
 
-    public Node find(int value) {
+    public Node find(int _value) {
         Node node = this.head;
         while (node != null) {
-            if (node.value == value)
+            if (node.value == _value)
                 return node;
             node = node.next;
         }
@@ -30,7 +34,7 @@ public class LinkedList {
     }
 
     public ArrayList<Node> findAll(int _value) {
-        ArrayList<Node> nodes = new ArrayList<Node>();
+        ArrayList<Node> nodes = new ArrayList<>();
         Node node = this.head;
         while (node != null) {
             if (node.value == _value)
@@ -42,7 +46,6 @@ public class LinkedList {
 
     public boolean remove(int _value) {
         Node node = this.head;
-        Node nodeLast = this.head;// ?
         while (node != null) {
             if (count() == 1 && this.head.value == _value) {
                 head = null;
@@ -51,17 +54,21 @@ public class LinkedList {
             }
             if (node == this.head && node.value == _value) {
                 this.head = head.next;
+                this.head.prev = null;
                 return true;
             }
             if (node == this.tail && node.value == _value) {
-                this.tail = nodeLast;
-                nodeLast.next = null;
-            }
-            if (node.value == _value) {
-                nodeLast.next = node.next;
+                this.tail = this.tail.prev;
+                this.tail.next = null;
                 return true;
             }
-            nodeLast = node;
+            if (node.value == _value) {
+                Node prev = node.prev;
+                Node next = node.next;
+                prev.next = next;
+                next.prev = prev;
+                return true;
+            }
             node = node.next;
         }
         return false;
@@ -69,7 +76,6 @@ public class LinkedList {
 
     public void removeAll(int _value) {
         Node node = this.head;
-        Node nodeLast = this.head;// ?
         while (node != null) {
             if (count() == 1 && this.head.value == _value) {
                 head = null;
@@ -78,15 +84,16 @@ public class LinkedList {
             }
             if (node == this.head && node.value == _value) {
                 this.head = head.next;
+                this.head.prev = null;
             } else if (node == this.tail && node.value == _value) {
-                this.tail = nodeLast;
-                nodeLast.next = null;
+                this.tail = this.tail.prev;
+                this.tail.next = null;
             } else if (node.value == _value) {
-                nodeLast.next = node.next;
-                node = node.next;
-                continue;
+                Node prev = node.prev;
+                Node next = node.next;
+                prev.next = next;
+                next.prev = prev;
             }
-            nodeLast = node;
             node = node.next;
         }
     }
@@ -116,27 +123,31 @@ public class LinkedList {
             Node node = this.head;
             this.head = _nodeToInsert;
             _nodeToInsert.next = node;
+            node.prev = _nodeToInsert;
             return;
         }
         if (_nodeAfter.next == null) {
             _nodeAfter.next = _nodeToInsert;
             this.tail = _nodeToInsert;
+            _nodeToInsert.prev = _nodeAfter;
             return;
         }
-        Node node1 = _nodeAfter.next;
+        _nodeToInsert.next = _nodeAfter.next;
         _nodeAfter.next = _nodeToInsert;
-        _nodeToInsert.next = node1;
+        _nodeToInsert.prev = _nodeAfter;
+        _nodeToInsert.next.prev = _nodeToInsert;
     }
-
 }
 
 class Node {
     public int value;
     public Node next;
+    public Node prev;
 
     public Node(int _value) {
         value = _value;
         next = null;
+        prev = null;
     }
 }
 
