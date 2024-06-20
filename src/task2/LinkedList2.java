@@ -1,3 +1,5 @@
+package task2;
+
 import java.util.*;
 
 public class LinkedList2 {
