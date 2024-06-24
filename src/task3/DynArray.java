@@ -1,3 +1,7 @@
+package task3;
+
+import java.lang.reflect.Array;
+
 public class DynArray<T> {
     public T[] array;
     public int count;
