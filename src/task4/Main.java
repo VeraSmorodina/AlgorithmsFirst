@@ -1,7 +1,7 @@
 package task4;
 
 public class Main {
-    public static boolean isBalanced(String s) {
+    public static boolean isBreacketsMatch(String s) {
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             char elem = s.charAt(i);
