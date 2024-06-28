@@ -8,7 +8,7 @@ public class Queue<T> {
     }
 
     public void enqueue(T item) {
-        elements.add(item);
+        elements.add(0, item);
     }
 
     public T dequeue() {
