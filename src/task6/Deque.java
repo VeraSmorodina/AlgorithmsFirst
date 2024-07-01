@@ -1,4 +1,6 @@
-Arraypublic class Deque<T> {
+import java.util.*;
+
+public class Deque<T> {
     private final LinkedList<T> elements;
 
     public Deque() {
