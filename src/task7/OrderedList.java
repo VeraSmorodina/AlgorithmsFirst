@@ -1,3 +1,5 @@
+package task7;
+
 import java.util.*;
 
 class Node<T> {
