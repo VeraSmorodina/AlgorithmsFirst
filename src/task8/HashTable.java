@@ -1,3 +1,5 @@
+package task8;
+
 public class HashTable {
     public int size;
     public int step;
