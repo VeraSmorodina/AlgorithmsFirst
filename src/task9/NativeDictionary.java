@@ -1,3 +1,5 @@
+package task9;
+
 import java.lang.reflect.Array;
 
 public class NativeDictionary<T> {
