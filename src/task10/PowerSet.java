@@ -1,3 +1,5 @@
+package task10;
+
 public class PowerSet {
 
     private final HashTable hashTable;
